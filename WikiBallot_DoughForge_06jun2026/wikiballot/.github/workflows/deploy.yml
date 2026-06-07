@@ -1,0 +1,68 @@
+name: Deploy WikiBallot to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build
+        run: |
+          cd hugo_source
+          hugo --minify
+          echo "Build complete. Pages:"
+          find public -name "*.html" | head -20
+
+      - name: Copy Bourgeois Resolution HTML
+        run: |
+          # The poem ships as a standalone interactive HTML
+          # It is placed in hugo public/ so it routes correctly
+          if [ -f "hugo_source/static/bourgeois-resolution/index.html" ]; then
+            echo "Bourgeois Resolution HTML found in static/"
+          else
+            echo "WARNING: bourgeois-resolution/index.html not found in static/"
+            echo "Place the clean HTML at hugo_source/static/bourgeois-resolution/index.html"
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: hugo_source/public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

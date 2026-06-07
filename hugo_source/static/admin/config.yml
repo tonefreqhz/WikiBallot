@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: tonefreqhz/WikiBallot
+  branch: main
+
+# Uncomment and set when you have a Cloudflare Worker or Netlify OAuth proxy:
+# base_url: https://your-oauth-proxy.workers.dev
+
+media_folder: hugo_source/static/img
+public_folder: /img
+
+site_url: https://tonefreqhz.github.io
+display_url: https://tonefreqhz.github.io
+logo_url: https://tonefreqhz.github.io/img/logo.png
+
+collections:
+
+  - name: constituency
+    label: Constituency Pages
+    label_singular: Constituency Page
+    folder: hugo_source/content/constituency
+    create: true
+    slug: "{{fields.slug}}/index"
+    path: "{{fields.slug}}/index"
+    media_folder: ''
+    public_folder: ''
+    fields:
+      - { label: Title, name: title, widget: string,
+          hint: "Your constituency name e.g. Hereford" }
+      - { label: Slug, name: slug, widget: string,
+          hint: "URL-safe name e.g. hereford (lowercase, hyphens only)" }
+      - { label: Region, name: region, widget: string,
+          hint: "e.g. West Midlands, Wales, Scotland" }
+      - { label: Organiser Name, name: organiser, widget: string }
+      - { label: Contact (optional), name: contact, widget: string,
+          required: false,
+          hint: "Email or Manyverse SSB ID — only share what you are comfortable with" }
+      - { label: Next Meeting, name: next_meeting, widget: datetime,
+          required: false,
+          hint: "Date and time of next local meet-up" }
+      - { label: Proof of Life, name: proof_of_life, widget: text,
+          hint: "What ONE thing has been done this week?" }
+      - { label: Body, name: body, widget: markdown,
+          hint: "Anything else — who you are, what you need, what you have done" }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Draft, name: draft, widget: boolean, default: false }
+
+  - name: doctrine
+    label: Doctrine Pages
+    folder: hugo_source/content/doctrine
+    create: true
+    slug: "{{fields.slug}}/index"
+    path: "{{fields.slug}}/index"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Slug, name: slug, widget: string }
+      - { label: Body, name: body, widget: markdown }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Draft, name: draft, widget: boolean, default: false }

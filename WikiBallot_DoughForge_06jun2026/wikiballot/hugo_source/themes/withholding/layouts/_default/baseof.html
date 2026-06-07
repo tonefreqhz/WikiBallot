@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<link rel="stylesheet" href="{{ "css/withholding.css" | relURL }}">
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-brand">
+      <a href="{{ "/" | relURL }}" class="brand-link">
+        <span class="brand-title">THE GREAT WITHHOLDING</span>
+        <span class="brand-sub">DoughForge · WikiBallot · Grub Street in Exile</span>
+      </a>
+    </div>
+    <nav class="site-nav">
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}" class="nav-link{{ if eq $.RelPermalink .URL }} active{{ end }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </div>
+</header>
+
+<main class="site-main">
+  {{ block "main" . }}{{ end }}
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-anchor">
+      W-Anchor: {{ .Site.Params.anchor }} &nbsp;|&nbsp;
+      <a href="{{ .Site.Params.wikiballot }}">WikiTacticalVoting</a> &nbsp;|&nbsp;
+      <a href="{{ .Site.Params.doughforge }}">DoughForge</a> &nbsp;|&nbsp;
+      <a href="{{ .Site.Params.github }}">GitHub</a>
+    </div>
+    <div class="footer-cc">
+      CC BY-SA 4.0 — Copy freely. Translate. Distribute.<br>
+      <em>{{ .Site.Params.tagline }}</em>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
