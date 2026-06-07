@@ -11,22 +11,23 @@ Copy everything here onto a USB stick. Hand it to someone. That person is now a 
 
 ## Download the Dongle
 
-Download the zip, extract to a FAT32 USB stick, open index.html in any browser. No internet required.
-
 - **GitHub:** [WikiBallot-dongle.zip](https://raw.githubusercontent.com/tonefreqhz/WikiBallot/main/dongle_root/WikiBallot-dongle.zip)
-- **IPFS (Pinata):** [bafkreiayztqorvvkfrjnucgprcwgxttpzuqzhdubhptvyeeh3z3dzwhdce](https://ivory-tasteless-turkey-433.mypinata.cloud/ipfs/bafkreiayztqorvvkfrjnucgprcwgxttpzuqzhdubhptvyeeh3z3dzwhdce)
-- **IPFS (public gateway):** [ipfs.io link](https://ipfs.io/ipfs/bafkreiayztqorvvkfrjnucgprcwgxttpzuqzhdubhptvyeeh3z3dzwhdce)
+- **IPFS (Pinata):** [dongle](https://ivory-tasteless-turkey-433.mypinata.cloud/ipfs/bafkreiaxpmun3il7ailsdrohza7fhqw7k7gmyzlvm4rhf6msjlcekswxbe)
+- **IPFS (public):** [ipfs.io](https://ipfs.io/ipfs/bafkreiaxpmun3il7ailsdrohza7fhqw7k7gmyzlvm4rhf6msjlcekswxbe)
+
+## Full Site on IPFS
+
+- **IPFS (Pinata):** [site](https://ivory-tasteless-turkey-433.mypinata.cloud/ipfs/bafybeib45cgof3wj3zko36enpmugwvcpadesxex4deimz6y25dhx73tomm)
+- **IPFS (public):** [ipfs.io](https://ipfs.io/ipfs/bafybeib45cgof3wj3zko36enpmugwvcpadesxex4deimz6y25dhx73tomm)
 
 ## Write to USB
 
-1. Download and install **[Balena Etcher](https://etcher.balena.io)** - writes USB sticks on Windows, Mac, Linux
+1. Download and install **[Balena Etcher](https://etcher.balena.io)**
 2. Extract the zip to the root of the USB stick
 3. Open index.html in any browser
 4. Hand the stick to someone
 
-## Ubuntu Desktop (optional - fully offline node)
-
-For a fully offline-capable node running a free operating system:
+## Ubuntu Desktop (optional)
 
 - **[Download Ubuntu 24.04 LTS](https://ubuntu.com/download/desktop)** - 5GB, free
 - Write to USB with Balena Etcher
@@ -34,6 +35,6 @@ For a fully offline-capable node running a free operating system:
 
 ## Seed to IPFS
 
-If you have IPFS installed, seed the site yourself and add a permanent node to the network. Instructions at [IPFS Docs](https://docs.ipfs.tech).
+If you have IPFS installed, seed the site yourself. Instructions at [IPFS Docs](https://docs.ipfs.tech).
 
-Every copy is a node. Every node is sovereign. Published under CC BY-SA 4.0 - copy freely.
+Every copy is a node. Every node is sovereign. CC BY-SA 4.0 - copy freely.

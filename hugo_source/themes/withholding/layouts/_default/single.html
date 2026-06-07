@@ -4,7 +4,8 @@
   {{ with .Params.subtitle }}<p style="font-style:italic;color:#666;margin-bottom:20px">{{ . }}</p>{{ end }}
   <div style="line-height:1.75;color:#222">{{ .Content }}</div>
   <div style="margin-top:40px;padding-top:16px;border-top:1px solid #ccc5b5;font-family:monospace;font-size:0.75rem;color:#888">
-    <a href="{{ "/" | relURL }}" style="color:#8b0000;text-decoration:none">← Back</a>
+    <a href="{{ .Site.BaseURL }}" style="color:#8b0000;text-decoration:none">← Back</a>
   </div>
 </div>
 {{ end }}
+
