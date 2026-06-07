@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Georgia,serif;background:#faf7f2;color:#1a1a1a;min-height:100vh}
+    nav{background:#1a1a1a;padding:10px 20px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    nav a{font-family:monospace;font-size:0.75rem;color:#faf7f2;text-decoration:none;letter-spacing:1px}
+    nav a:hover{color:#8b0000}
+    nav .site-title{font-weight:bold;margin-right:12px;border-right:1px solid #444;padding-right:16px}
+    main{max-width:900px;margin:0 auto;padding:20px}
+    footer{background:#1a1a1a;color:#888;font-family:monospace;font-size:0.7rem;text-align:center;padding:16px;margin-top:60px}
+    footer a{color:#888;text-decoration:none}
+    footer a:hover{color:#faf7f2}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+  {{ range .Site.Menus.main }}
+  <a href="{{ .URL }}">{{ .Name }}</a>
+  {{ end }}
+</nav>
+<main>
+  {{ block "main" . }}{{ end }}
+</main>
+<footer>
+  <p>{{ .Site.Params.tagline }} &nbsp;·&nbsp; <a href="{{ .Site.Params.github }}" target="_blank">GitHub</a> &nbsp;·&nbsp; <a href="{{ .Site.Params.doughforge }}" target="_blank">DoughForge</a> &nbsp;·&nbsp; W-Anchor {{ .Site.Params.anchor }}</p>
+</footer>
+</body>
+</html>

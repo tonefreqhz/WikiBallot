@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div style="max-width:760px;margin:0 auto;padding:20px">
+  <h1 style="font-size:1.8rem;border-bottom:3px solid #8b0000;padding-bottom:10px;margin-bottom:24px">{{ .Title }}</h1>
+  <div style="line-height:1.75;color:#222;margin-bottom:30px">{{ .Content }}</div>
+  {{ if .Pages }}
+  <div style="display:grid;gap:14px">
+    {{ range .Pages }}
+    <div style="border:1px solid #ccc5b5;border-left:4px solid #8b0000;padding:16px">
+      <h2 style="font-size:1rem;margin-bottom:6px"><a href="{{ .RelPermalink }}" style="color:#1a1a1a;text-decoration:none">{{ .Title }}</a></h2>
+      {{ with .Description }}<p style="font-size:0.85rem;color:#555;margin:0">{{ . }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+  <div style="margin-top:40px;padding-top:16px;border-top:1px solid #ccc5b5;font-family:monospace;font-size:0.75rem">
+    <a href="{{ "/" | relURL }}" style="color:#8b0000;text-decoration:none">← Back</a>
+  </div>
+</div>
+{{ end }}

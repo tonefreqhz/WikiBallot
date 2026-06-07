@@ -1,0 +1,46 @@
+baseURL       = "https://tonefreqhz.github.io/WikiBallot/"
+relativeURLs  = false
+languageCode  = "en-gb"
+title         = "The Great Withholding"
+theme         = "withholding"
+enableRobotsTXT = true
+
+[params]
+  anchor      = "c9ced1a"
+  tagline     = "Every copy is a node. Every node is sovereign."
+  description = "Manifesto, evidence, poetry and constituency tools for the Great Withholding network."
+  author      = "Roger G. Lewis"
+  wikiballot  = "https://wikitacticalvoting.miraheze.org"
+  doughforge  = "https://www.doughforge.org"
+  github      = "https://github.com/tonefreqhz/WikiBallot"
+  weebly      = "https://wikiballot.weebly.com"
+  substack    = "https://substack.com/@rogerglewis"
+
+[menu]
+  [[menu.main]]
+    name = "Manifesto"
+    url  = "/WikiBallot/manifesto/"
+    weight = 1
+  [[menu.main]]
+    name = "Evidence"
+    url  = "/WikiBallot/evidence/"
+    weight = 2
+  [[menu.main]]
+    name = "Bourgeois Resolution"
+    url  = "/WikiBallot/bourgeois-resolution/"
+    weight = 3
+  [[menu.main]]
+    name = "Constituency"
+    url  = "/WikiBallot/constituency/"
+    weight = 4
+  [[menu.main]]
+    name = "Doctrine"
+    url  = "/WikiBallot/doctrine/"
+    weight = 5
+  [[menu.main]]
+    name = "Duplicate Dongle"
+    url  = "/WikiBallot/duplicate/"
+    weight = 6
+
+[markup.goldmark.renderer]
+  unsafe = true
