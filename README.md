@@ -2,10 +2,10 @@
 
 > *Every copy is a node. Every node is sovereign.*
 
-**Live site:** https://tonefreqhz.github.io/WikiBallot/  
-**WikiTacticalVoting:** https://wikitacticalvoting.miraheze.org  
-**DoughForge:** https://www.doughforge.org  
-**Weebly archive:** https://wikiballot.weebly.com  
+**Live site:** https://tonefreqhz.github.io/WikiBallot/
+**IPFS:** https://ipfs.io/ipfs/bafybeib45cgof3wj3zko36enpmugwvcpadesxex4deimz6y25dhx73tomm
+**WikiTacticalVoting:** https://wikitacticalvoting.miraheze.org
+**DoughForge:** https://www.doughforge.org
 
 ---
 
@@ -13,118 +13,104 @@
 
 WikiBallot is the digital infrastructure of the Great Withholding — a decentralised network of constituency nodes coordinated by shared doctrine, not central authority.
 
-The site publishes the Manifesto of the Great Withholding (a Declaration of Popular Sovereignty Against Odious Debt, June 2026), the Evidence Appendix (the Arithmetic of Extraction), constituency coordination tools, and instructions for duplicating the dongle — the offline, hand-to-hand distribution node.
-
 The architecture is intentionally resilient: static HTML deployable to GitHub Pages, IPFS, a USB dongle, or a local mesh. No database. No platform dependency. No single point of capture.
 
 ---
 
-## Repository Structure
+## Build a Sovereign Dongle
 
-```
-WikiBallot/
-├── hugo_source/              # Hugo static site generator source
-│   ├── config.toml           # Site config — baseURL, menu, params
-│   ├── content/              # All page content in Markdown
-│   │   ├── _index.md         # Home — The Great Withholding
-│   │   ├── manifesto/        # Nine-article manifesto
-│   │   ├── evidence/         # Arithmetic of Extraction appendix
-│   │   ├── bourgeois-resolution/  # Poem in three voices
-│   │   ├── constituency/     # Find Your Constituency
-│   │   ├── doctrine/         # Odious debt, Ruml, jubilee doctrine
-│   │   └── duplicate/        # Dongle duplication instructions
-│   ├── themes/withholding/   # Custom theme — dark/cream, monospace
-│   │   └── layouts/          # index.html, single.html, list.html
-│   └── public/               # Hugo build output (do not edit)
-├── dongle_root/              # Offline dongle file tree
-├── js/                       # Supporting JavaScript
-└── .nojekyll                 # GitHub Pages — bypass Jekyll
-```
+A bootable USB stick running Ubuntu Desktop with the full WikiBallot site. Boots on any x86-64 machine. No installation required. No internet required after build. Cost: £1.80-£4.00 per stick.
 
-**Branches:**
+### What you need
 
-| Branch | Purpose |
-|--------|---------|
-| `main` | Hugo source and repo configuration |
-| `gh-pages` | Built static site — deployed by GitHub Pages |
+- USB stick, 16GB minimum
+- Rufus https://rufus.ie - Windows USB writer, free
+- Ubuntu 26.04 Desktop ISO https://releases.ubuntu.com/26.04/
+- This repository cloned locally
 
----
+### Step 1 - Write Ubuntu with Rufus
 
-## Deployment
+1. Open Rufus as Administrator
+2. Device: select your USB stick
+3. Boot selection: SELECT the Ubuntu ISO
+4. Partition scheme: GPT
+5. Target system: UEFI (non CSM)
+6. Persistent partition size: 7000 MB
+7. Volume label: GreatWithholding
+8. Click START - wait 15-20 minutes
 
-The site builds with Hugo and deploys to the `gh-pages` branch via worktree. W-Anchor reference: `c9ced1a`.
+### Step 2 - Boot into Ubuntu
 
-```powershell
-# 1. Build
-cd hugo_source
-hugo --minify
-cd ..
+1. Leave stick in, restart machine
+2. Press F12 at POST screen (HP: F9, Dell/Lenovo: F12, ASUS: F8)
+3. Select USB stick from boot menu
+4. Ubuntu Desktop live session loads
 
-# 2. Deploy to gh-pages
-git worktree add gh-pages-deploy gh-pages
-Get-ChildItem gh-pages-deploy | Remove-Item -Recurse -Force
-Copy-Item -Path "hugo_source\public\*" -Destination "gh-pages-deploy\" -Recurse -Force
-"" | Set-Content "gh-pages-deploy\.nojekyll"
-cd gh-pages-deploy
-git add .
-git commit -m "Deploy Hugo site - W-Anchor c9ced1a"
-git push origin gh-pages --force
-cd ..
-git worktree remove gh-pages-deploy --force
-```
+### Step 3 - Copy WikiBallot to the stick
 
----
+In Ubuntu terminal (Ctrl+Alt+T):
 
-## Content Sections
+    lsblk
+    sudo mkdir -p /mnt/windows
+    sudo mount -t ntfs-3g /dev/sda4 /mnt/windows
+    mkdir -p ~/greatwithholding/wikiballot
+    cp -r /mnt/windows/Users/YOUR_USERNAME/Documents/DoughForge/WikiBallot/hugo_source/public/* ~/greatwithholding/wikiballot/
 
-| Section | Content |
-|---------|---------|
-| **Manifesto** | Nine articles: the system, the debt, the double-down, the withholding, the jubilee demand, the sovereign default lie, the positive programme, the utopian charge, the declaration |
-| **Evidence** | The Arithmetic of Extraction — primary source verification: BIS $846T derivatives, OCC Q4 2025, IMF Global Debt Monitor, MIT Lucas (2019), Bank of England QB Q1 2014 |
-| **Bourgeois Resolution** | Poem in three voices plus a fourth for the reader. Thesis · Anti-Thesis · Synthesis · Your Voice |
-| **Constituency** | Coordination tool linking to WikiTacticalVoting. The constituency is the atomic unit of the network |
-| **Doctrine** | Odious debt doctrine, Ruml 1946, Going Direct, the jubilee mechanism, monetary sovereignty |
-| **Duplicate** | Instructions for copying the full site to a USB dongle and distributing hand to hand |
+Replace sda4 with your Windows partition from lsblk output.
+
+### Step 4 - Serve locally
+
+    cd ~/greatwithholding/wikiballot
+    python3 -m http.server 8090
+
+Open Firefox at http://localhost:8090
+
+### Step 5 - Duplicate
+
+Hand the stick to someone. They boot it, copy it, hand it on.
+
+Download zip:
+- GitHub: https://raw.githubusercontent.com/tonefreqhz/WikiBallot/main/dongle_root/WikiBallot-dongle.zip
+- IPFS: https://ipfs.io/ipfs/bafkreiaxpmun3il7ailsdrohza7fhqw7k7gmyzlvm4rhf6msjlcekswxbe
 
 ---
 
-## The Dongle
+## Deploy to GitHub Pages
 
-The dongle is the offline distribution node. Every USB stick running this site is a sovereign copy. Cost: £1.80–£4.00.
-
-```
-dongle_root/
-├── index.html        # Entry point
-├── manifesto/
-├── evidence/
-├── constituency/
-└── duplicate/        # These instructions, recursively
-```
-
-Copy `hugo_source/public/` to a FAT32 USB stick. Open `index.html` in any browser. No internet required.
+    cd hugo_source && hugo --minify && cd ..
+    git worktree add gh-pages-deploy gh-pages
+    Get-ChildItem gh-pages-deploy | Remove-Item -Recurse -Force
+    Copy-Item -Path "hugo_source\public\*" -Destination "gh-pages-deploy\" -Recurse -Force
+    "" | Set-Content "gh-pages-deploy\.nojekyll"
+    cd gh-pages-deploy
+    git add .
+    git commit -m "Deploy - W-Anchor c9ced1a"
+    git push origin gh-pages --force
+    cd ..
+    git worktree remove gh-pages-deploy --force
 
 ---
 
-## Doctrine
+## IPFS
 
-The Great Withholding holds that:
+Site CID: bafybeib45cgof3wj3zko36enpmugwvcpadesxex4deimz6y25dhx73tomm
+Dongle CID: bafkreiaxpmun3il7ailsdrohza7fhqw7k7gmyzlvm4rhf6msjlcekswxbe
 
-- The post-2008 debt is **odious debt** under international law — incurred without consent, not for the benefit of the people, and where the creditors knew this
-- The bond markets are not a force of nature but a mechanism of the creditor class
-- Monetary sovereignty belongs to the people
-- The jubilee — cancellation of odious debt — is not utopian but arithmetic
-- The withholding is the withdrawal of consent from every mechanism of extraction, simultaneously and without a central committee
+https://ipfs.io/ipfs/bafybeib45cgof3wj3zko36enpmugwvcpadesxex4deimz6y25dhx73tomm
 
-*Sources: BIS OTC Derivatives Statistics Dec 2025; OCC Q4 2025; IMF Global Debt Monitor Sep 2025; Bank of England QB Q1 2014; Lucas (2019) MIT Sloan; Ruml (1946); Leviticus 25.*
+---
+
+## The Dongle Philosophy
+
+Ten active duplicators in a network of 650 constituency nodes is the threshold for network persistence (Nowak log2 cooperation mathematics). Ten people. Ten sticks. The network does not die.
+
+Full argument: https://tonefreqhz.github.io/WikiBallot/doctrine/dongle-philosophy/
 
 ---
 
 ## Licence
 
-Content: CC BY-SA 4.0. Copy freely. Translate. Distribute. Post it on the wall. Put it on the dongle.
-
+Content: CC BY-SA 4.0. Copy freely. Translate. Distribute. Put it on the dongle.
 Code: MIT.
 
----
-
-*W-Anchor: c9ced1a · Roger G. Lewis · DoughForge / Grub Street in Exile*
+*W-Anchor: c9ced1a - Roger G. Lewis - DoughForge / Grub Street in Exile*
